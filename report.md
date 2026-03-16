@@ -128,11 +128,11 @@ Output contains **286,510 rows** (merchant × state combinations). Top 20:
 
 ### Key Findings
 
-- Average ticket sizes across the top merchants are remarkably similar — all clustering between
+- Average ticket sizes across the top merchants are remarkably similar, all clustering between
   $39,400 and $40,000. The dataset's purchase amounts appear to be within a tight band.
 - State -1 appears in the results, which means some transactions have an unknown/unresolved state_id.
   This is expected and kept in the analysis.
-- No single state dominates the top of the ranking — states 1, 2, 4, 5, 7, 9, 15, 16 all appear
+- No single state dominates the top of the ranking, states 1, 2, 4, 5, 7, 9, 15, 16 all appear
   in the top 20, suggesting the high-ticket segment is geographically distributed.
 
 ---
@@ -147,7 +147,7 @@ Output contains **286,510 rows** (merchant × state combinations). Top 20:
 - Filtered rank ≤ 3
 - Formatted hour as military time: `8 → "0800"`, `13 → "1300"`, etc.
 
-### Results (complete — only 12 rows)
+### Results (complete only 12 rows)
 
 | Product Category | Hour |
 |------------------|------|
@@ -168,7 +168,7 @@ Output contains **286,510 rows** (merchant × state combinations). Top 20:
 
 - Categories A and B peak at the same hours: noon and 1 PM, with a secondary spike at 1700 (A)
   and 1400 (B). This suggests a lunch-hour and late-afternoon shopping pattern.
-- Category C shifts later — peak hours are 1500, 1600, 1700. Could indicate a different buyer
+- Category C shifts later peak hours are 1500, 1600, 1700. Could indicate a different buyer
   type or product that people tend to buy after work.
 - "Unknown category" has 0000 as its top hour, which is suspicious and likely reflects
   transactions with missing time data being defaulted to midnight. The other two peaks (1300, 1400)
@@ -251,14 +251,14 @@ Output has **270,190 rows**. Top 15:
 
 ### Key Findings
 
-- **merchant_city_id = -1** is the dominant "city" — 81,654 merchants (about 30% of all merchants)
+- **merchant_city_id = -1** is the dominant "city"  81,654 merchants (about 30% of all merchants)
   have no known location. These account for 2.5M transactions, more than any real city. This limits
   geographic conclusions somewhat.
 - Among known cities, **city 69** is clearly the most active market: 18,600 merchants and 847,204
-  transactions — roughly 3x the next city (158, with 258K transactions).
+  transactions roughly 3x the next city (158, with 258K transactions).
 - **Category distribution is remarkably consistent across cities.** Almost every city shows the
   same pattern: ~45–65% category A, ~30–40% category B, ~5–9% category C. There's no strong
-  city-category correlation — the category mix doesn't change much depending on location.
+  city-category correlation, the category mix doesn't change much depending on location.
 - The most notable variation is that smaller cities tend to have slightly higher category A share
   (e.g., city 3 at 64.88% vs city -1 at 46.04%), but the differences aren't dramatic enough to
   recommend a different category strategy by city.
@@ -282,7 +282,7 @@ Based on the city summary from Q4, the top cities by transaction volume (excludi
 **Recommendation: City 69.** It has nearly 3.5x more transaction volume than the second city, and
 also has the highest-volume individual merchants (Henry Barnhill inc at 42K transactions, June Gray
 at 27K, Weston Hendon at 26K). This suggests an active consumer base. The tradeoff is higher
-competition — 18,600 merchants are already there. Cities 158 and 17 are solid second choices with
+competition, 18,600 merchants are already there. Cities 158 and 17 are solid second choices with
 less competition relative to their volume.
 
 ### b) Recommended Categories
@@ -337,7 +337,7 @@ hours must be shorter, prioritize noon–6 PM at a minimum.
 
 - Monthly default rate: **22.9%** — treated as cumulative per installment: `P(default for N installments) = 1 - (1 - 0.229)^N`
 - Gross margin: **25%** of revenue
-- Equal installments — each installment = `amount / N`
+- Equal installments each installment = `amount / N`
 - Defaulters pay `floor(N/2)` installments before stopping
 
 #### Summary: Single Payment vs Installments
