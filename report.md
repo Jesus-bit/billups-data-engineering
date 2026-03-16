@@ -7,8 +7,8 @@ was to answer 5 business questions about merchant performance, geographic patter
 for a hypothetical new merchant entering the market.
 
 **Datasets used:**
-- `historical_transactions.parquet` — 7,274,367 transaction records (Jan 2017 – Feb 2018)
-- `merchants-subset.csv` — 334,696 merchant records (deduplicated to 334,633 unique merchant_ids)
+- `historical_transactions.parquet` 7,274,367 transaction records (Jan 2017 – Feb 2018)
+- `merchants-subset.csv` 334,696 merchant records (deduplicated to 334,633 unique merchant_ids)
 
 All analysis was done using the PySpark DataFrame API (no spark.sql()).
 
@@ -23,7 +23,7 @@ Before running any analysis, the following cleaning steps were applied:
    `most_recent_sales_range` (A > B > C > D > E) as a proxy for the most active/relevant record.
 
 2. **Null categories:** 44,625 transactions had a null `category` value. Per the challenge spec,
-   these were NOT dropped — replaced with `"Unknown category"` instead.
+   these were NOT dropped, replaced with `"Unknown category"` instead.
 
 3. **Missing merchant names:** 1 merchant_id in transactions had no match in the merchants table.
    Additionally, 34,570 transactions had a null `merchant_id`. Both cases used the merchant_id
@@ -49,7 +49,7 @@ Before running any analysis, the following cleaning steps were applied:
 - Grouped transactions by month (formatted as "MMM yyyy"), `city_id`, and `merchant_name`
 - Aggregated `sum(purchase_amount)` as Purchase Total and `count(*)` as No of sales
 - Applied `dense_rank()` window function partitioned by (month, city_id), ordered by Purchase Total desc
-- Filtered to rank ≤ 5 — dense_rank keeps ties visible so the result may occasionally have more than 5 rows per group
+- Filtered to rank ≤ 5 dense_rank keeps ties visible so the result may occasionally have more than 5 rows per group
 
 ### Results
 
@@ -84,8 +84,8 @@ Output contains **21,374 rows** covering 14 months × 272 cities. Sample from Ja
   $41M in January alone, compared to the top merchant in city 2 doing less than $400K.
 - The same merchants (Cesar Hall inc, Kathie Sughrue inc, Mary Gray 7 inc) appear consistently
   at the top of city 1 across all 14 months, suggesting entrenched market leaders.
-- By Nov 2017, Kathie Sughrue inc in city 1 had grown to $223M/month — roughly a 10x increase
-  from Jan 2017's $22M — indicating either organic growth or a seasonal ramp-up.
+- By Nov 2017, Kathie Sughrue inc in city 1 had grown to $223M/month roughly a 10x increase
+  from Jan 2017's $22M indicating either organic growth or a seasonal ramp-up.
 - Smaller cities (2, 3, 6, 7) have much lower absolute volumes but a similar competitive structure
   with one or two dominant merchants.
 
@@ -298,7 +298,7 @@ Category distribution based on transaction count and revenue across all 7.3M tra
 
 **Recommendation: Category A**, followed by B as a secondary line. Category A has the most
 transactions by a wide margin. Avg ticket is nearly identical across categories (~$20,100), so
-volume is what differentiates them — and A wins there by ~900K transactions over B.
+volume is what differentiates them and A wins there by ~900K transactions over B.
 
 Category C is a distant third and likely a niche segment. For a new merchant, starting with A
 gives the largest addressable market.
@@ -317,7 +317,7 @@ Monthly transaction and revenue trends across the 14-month dataset:
 | Feb 2018 | Partial month (data ends mid-Feb), lower absolute numbers      |
 
 **Recommendation:** Plan for a significant revenue spike in November–December. If possible, increase
-inventory and staffing during Q4. January will likely be slow — don't interpret the drop as a
+inventory and staffing during Q4. January will likely be slow, don't interpret the drop as a
 structural decline.
 
 ### d) Recommended Business Hours
@@ -335,7 +335,7 @@ hours must be shorter, prioritize noon–6 PM at a minimum.
 
 #### Assumptions (from the challenge spec)
 
-- Monthly default rate: **22.9%** — treated as cumulative per installment: `P(default for N installments) = 1 - (1 - 0.229)^N`
+- Monthly default rate: **22.9%** treated as cumulative per installment: `P(default for N installments) = 1 - (1 - 0.229)^N`
 - Gross margin: **25%** of revenue
 - Equal installments each installment = `amount / N`
 - Defaulters pay `floor(N/2)` installments before stopping
@@ -347,7 +347,7 @@ hours must be shorter, prioritize noon–6 PM at a minimum.
 | installment  | 459,703     | $9,247,290,345       | $20,115.79 | **-$639,879,927**         | **-$1,391.94**      |
 | single       | 6,814,614   | $136,979,837,069     | $20,100.89 | $34,244,959,267           | $5,025.22           |
 
-Installments as a whole generate **negative expected profit** — the default risk wipes out the margin
+Installments as a whole generate **negative expected profit** the default risk wipes out the margin
 and then some. Single payments yield a clean $5,025 expected profit per sale.
 
 #### Breakdown by Number of Installments
@@ -399,6 +399,6 @@ A couple of notes on the numbers:
 | Null categories (44,625 records) | Replaced with "Unknown category", not dropped |
 | Null merchant_id (34,570 records) | Kept, used null as display identifier |
 | Installments = 999 (50 records) | Excluded from Q5e only |
-| merchant_city_id = -1 | Kept throughout — represents unknown merchant location |
+| merchant_city_id = -1 | Kept throughout represents unknown merchant location |
 | purchase_date format | Parsed from string to timestamp |
 | Default rate interpretation | Applied as monthly cumulative: `1 - 0.771^N` |
