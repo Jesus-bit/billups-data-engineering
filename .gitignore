@@ -1,0 +1,44 @@
+# data files
+data/
+
+# virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# distribution / packaging
+*.egg-info/
+dist/
+build/
+*.egg
+
+# spark artifacts
+spark-warehouse/
+derby.log
+metastore_db/
+*.crc
+
+# environment variables
+.env
+.env.local
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# logs
+*.log
+logs/
