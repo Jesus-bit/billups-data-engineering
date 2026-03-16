@@ -376,17 +376,17 @@ and then some. Single payments yield a clean $5,025 expected profit per sale.
 
 **Offer a maximum of 2 installments. Do not offer 3 or more.**
 
-At 2 installments, the effective margin drops from 25% to 4.72% — painful but still positive.
+At 2 installments, the effective margin drops from 25% to 4.72% painful but still positive.
 At 3 installments, cumulative default probability hits 54% and the margin goes negative (-11%).
 From there it only gets worse.
 
 A couple of notes on the numbers:
 - The zigzag pattern in effective margin (e.g., 4 installments is less bad than 3) is a
   mathematical artifact of the `floor(N/2)` defaulter model. With 4 installments, a defaulter pays
-  2 out of 4. With 3 installments, they pay 1 out of 3 — a lower fraction — making 3 worse than 4.
+  2 out of 4. With 3 installments, they pay 1 out of 3 a lower fraction making 3 worse than 4.
 - Installments 0 and 1 both show 25% margin. The model treats 0 as "no installments" (same as single
   payment, zero default risk). The 22.9% default rate on installments=1 technically applies but the
-  payout structure means the merchant still receives 100% before any default could happen — so the
+  payout structure means the merchant still receives 100% before any default could happen so the
   margin holds at 25%.
 
 ---
